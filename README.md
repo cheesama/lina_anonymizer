@@ -1,6 +1,7 @@
 # lina_anonymizer
 text anonymizer based on flow
 
+## overall workflow
 ```mermaid
 graph TD;
     AA[annotator] --> |register rule-set|A
