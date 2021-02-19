@@ -26,4 +26,26 @@ graph TD;
     docker run -it -p 1881:1880 -v node-red:/data --name anonymizer-flow nodered/node-red
 
 ### streamlit
+    streamlit run streamlit/streamlit_app.py
 
+## Architecture(As-is)
+```mermaid
+graph TD;
+    A[strapi - EC2] --> B[rule-entity-extractor - EC2];
+    B --> C[node-red - EC2];
+    D[User query] --> C;
+    C --> E[masked result];
+```
+
+## Architecture(To-be)
+```mermaid
+graph TD;
+    A[k8s] --> B[pod1]
+    A[k8s] --> C[pod2]
+    A[k8s] --> D[pod3]
+    B --> E[strapi docker]
+    C --> F[node-red docker]
+    D --> G[rule server docker]
+    E --> F
+    F --> G
+```
