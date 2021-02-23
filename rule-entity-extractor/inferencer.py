@@ -65,9 +65,9 @@ patterns_anonymization_flag = {}
 model_version = datetime.today().strftime("%Y-%m-%d")
 
 def load_rules():
-    patterns = {}
-    patterns_anonymization_flag = {}
-    model_version = datetime.today().strftime("%Y-%m-%d")
+    global patterns
+    global patterns_anonymization_flag
+    global model_version
 
     ## collect single pattern
     single_patterns = get("regexes")
@@ -120,6 +120,8 @@ async def match_rule_entities(text: str):
     extracted = []
 
     print (f'query: {text}')
+
+    print (patterns)
 
     for k, v in patterns.items():
         matches = re.finditer(pattern=v, string=text)
