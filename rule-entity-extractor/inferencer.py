@@ -9,6 +9,7 @@ import re
 import json
 import requests
 import multiprocessing
+import operator
 
 headers = {'accept': 'application/json', 'content-type': 'application/json'}
 
@@ -160,6 +161,7 @@ async def match_rule_entities(text: str):
             if j == len(extracted) - 1:
                 remove_overlapped.append(target_entity)
 
+    remove_overlapped.sort(key=operator.itemgetter('start'))
     print (remove_overlapped)
 
     return remove_overlapped
