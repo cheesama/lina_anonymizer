@@ -62,32 +62,40 @@ is_ready = False
 
 patterns = {}
 patterns_anonymization_flag = {}
-
-## collect single pattern
-single_patterns = get("regexes")
-for pattern in single_patterns:
-    patterns[pattern["entity"]] = pattern["pattern"]
-    patterns_anonymization_flag[pattern['entity']] = pattern['anonymization']
-
-## collect combination pattern
-combination_patterns = get("regex-combinations")
-for combination in combination_patterns:
-    gen_regex_comb = []
-    for _, pattern_list in combination["combination"].items():
-        gen_regex = []
-        for each_pattern in pattern_list:
-            gen_regex.append(patterns[each_pattern].split("|"))
-        gen_regex_comb += ["\\s*".join(regex) for regex in list(product(*gen_regex))]
-
-    patterns[combination["entity"]] = "|".join(gen_regex_comb)
-    patterns_anonymization_flag[combination['entity']] = combination['anonymization']
-
-print(f"total patterns: {len(patterns)}")
-for k, v in patterns.items():
-    print(f"{k}:\t{v}")
-
 model_version = datetime.today().strftime("%Y-%m-%d")
-is_ready = True
+
+def load_rules():
+    patterns = {}
+    patterns_anonymization_flag = {}
+    model_version = datetime.today().strftime("%Y-%m-%d")
+
+    ## collect single pattern
+    single_patterns = get("regexes")
+    for pattern in single_patterns:
+        patterns[pattern["entity"]] = pattern["pattern"]
+        patterns_anonymization_flag[pattern['entity']] = pattern['anonymization']
+
+    ## collect combination pattern
+    combination_patterns = get("regex-combinations")
+    for combination in combination_patterns:
+        gen_regex_comb = []
+        for _, pattern_list in combination["combination"].items():
+            gen_regex = []
+            for each_pattern in pattern_list:
+                gen_regex.append(patterns[each_pattern].split("|"))
+            gen_regex_comb += ["\\s*".join(regex) for regex in list(product(*gen_regex))]
+
+        patterns[combination["entity"]] = "|".join(gen_regex_comb)
+        patterns_anonymization_flag[combination['entity']] = combination['anonymization']
+
+    print(f"total patterns: {len(patterns)}")
+    for k, v in patterns.items():
+        print(f"{k}:\t{v}")
+
+    model_version = datetime.today().strftime("%Y-%m-%d")
+    is_ready = True
+
+load_rules()
 
 # endpoints
 @app.get("/")
@@ -96,7 +104,16 @@ async def health():
         output = {"code": 200}
     else:
         output = {"code": 500}
+
     return output
+
+@app.post("/reload")
+async def reload_rules():
+    try:
+        load_rules()
+        return {"code":200}
+    except:
+        return {"code":500}
 
 @app.post("/predict")
 async def match_rule_entities(text: str):
