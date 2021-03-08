@@ -18,6 +18,7 @@ RUN buildDeps='gcc libc6-dev make' \
     && apt-get purge -y --auto-remove $buildDeps
 
 ENV SHELL /bin/bash
+ENV RULE_SERVER_ADDR localhost:18501
 
 #install node-red & contrib packages
 RUN npm install -g --unsafe-perm node-red

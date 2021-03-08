@@ -18,6 +18,7 @@ RUN buildDeps='gcc libc6-dev make' \
     && apt-get purge -y --auto-remove $buildDeps
 
 ENV SHELL /bin/bash
+ENV NODERED_ADDR localhost:18087
 
 COPY streamlit_app.py streamlit_app.py
 EXPOSE 8001

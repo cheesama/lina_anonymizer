@@ -1,13 +1,14 @@
+from spacy import displacy
+
 import streamlit as st
 import requests
 import json
 import random
-
-from spacy import displacy
+import os, sys
 
 query_input = st.text_input('query:')
 
-url = 'http://localhost:1881/'
+url = os.getenv('NODERED_ADDR', 'http://localhost:18087') + '/'
 headers = {'content-type': 'application/json'}
 
 def add_colormap(labels):
@@ -27,6 +28,7 @@ if query_input != '':
     data = {'text': query_input}
     with st.spinner('Predicting ...'):
         result = requests.post(url + 'query', data=json.dumps(data, ensure_ascii=False).encode('utf8'), headers=headers)
+
         entity_result = json.loads(result.text)
         for entity in entity_result:
             entity['label'] = entity['entity']

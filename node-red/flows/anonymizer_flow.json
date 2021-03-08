@@ -24,12 +24,12 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "http://210.121.159.217:8001/predict?text={{{text}}}",
+        "url": "{{{url}}}/predict?text={{{text}}}",
         "tls": "",
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 560,
+        "x": 780,
         "y": 300,
         "wires": [
             [
@@ -68,7 +68,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
+        "x": 990,
         "y": 260,
         "wires": []
     },
@@ -79,7 +79,7 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 770,
+        "x": 990,
         "y": 300,
         "wires": []
     },
@@ -97,7 +97,7 @@
         "y": 300,
         "wires": [
             [
-                "5e962323.71886c"
+                "598f9d11.526714"
             ]
         ]
     },
@@ -109,12 +109,12 @@
         "method": "POST",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "http://210.121.159.217:8001/reload",
+        "url": "{{{url}}}/reload",
         "tls": "",
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 560,
+        "x": 780,
         "y": 400,
         "wires": [
             [
@@ -132,11 +132,11 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 130,
+        "x": 140,
         "y": 400,
         "wires": [
             [
-                "2e9c6dad.cf21a2"
+                "48d31517.86caac"
             ]
         ]
     },
@@ -153,7 +153,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
+        "x": 990,
         "y": 360,
         "wires": []
     },
@@ -164,8 +164,89 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 770,
+        "x": 990,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "c143978.e195c68",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "RULE_SERVER_ADDR",
+        "payloadType": "env",
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "7e4fc65e.2088c8"
+            ]
+        ]
+    },
+    {
+        "id": "7e4fc65e.2088c8",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "598f9d11.526714",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "get rule-server url",
+        "func": "msg.url = env.get(\"RULE_SERVER_ADDR\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "5e962323.71886c"
+            ]
+        ]
+    },
+    {
+        "id": "48d31517.86caac",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "get rule-server url",
+        "func": "msg.url = env.get(\"RULE_SERVER_ADDR\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 530,
+        "y": 400,
+        "wires": [
+            [
+                "2e9c6dad.cf21a2"
+            ]
+        ]
     }
 ]
