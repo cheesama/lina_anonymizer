@@ -29,9 +29,6 @@ EXPOSE 1880
 #add internal javascript dependency modules
 RUN npm install sync-request url-join
 
-#expand flow edit space
-COPY red.min.js /usr/lib/node_modules/node-red/node_modules/@node-red/editor-client/public/red/red.min.js
-
 WORKDIR /workspace/
 RUN mkdir -p /root/.node-red/envnodes
 
