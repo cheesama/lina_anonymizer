@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "regex_combinations",
+  "info": {
+    "name": "regex-combination",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "entity": {
+      "type": "string"
+    },
+    "anonymization": {
+      "type": "boolean",
+      "default": false
+    },
+    "combination": {
+      "type": "json"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/regexes",
+      "handler": "regex.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/regexes/count",
+      "handler": "regex.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/regexes/:id",
+      "handler": "regex.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/regexes",
+      "handler": "regex.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/regexes/:id",
+      "handler": "regex.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/regexes/:id",
+      "handler": "regex.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
