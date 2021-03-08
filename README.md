@@ -15,13 +15,13 @@ graph TD;
 ## initial setting
 prepare below docker images
 
-strapi/strapi
+- strapi/strapi
 
-rule_entity_extractor_anonymizer(build from rule-entity-extractor folder)
+- rule_entity_extractor_anonymizer(build from rule-entity-extractor folder)
 
-nodered_anonymizer(build from node-red folder)
+- nodered_anonymizer(build from node-red folder)
 
-streamlit_anonymizer(build from streamlit folder)
+- streamlit_anonymizer(build from streamlit folder)
 
 ## running command
 
