@@ -26,20 +26,23 @@ prepare below docker images
 ## running command(check host ip for setting module endpoint)
 
 ### strapi(showing)
-    create  strapi project from create_strapi_project.sh (manually)
+    #create  strapi project from create_strapi_project.sh (manually)
     docker build -t strapi_anonymizer:0.1 .
     docker container create --name strapi_anonymizer_container -p 18501:1337 strapi_anonymizer:0.1
     docker container start strapi_anonymizer_container
 
 ### rule-entity-extractor
+    docker build -t rule_entity_extractor_anonymizer:0.1 .
     export META_ENDPOINT=localhost:18501/
     docker run -e META_ENDPOINT -p 18086:8000 rule_entity_extractor_anonymizer:0.1 
     
 ### node-red
+    docker build -t nodered_anonymizer:0.1 .
     export RULE_SERVER_ADDR=localhost:18086
     docker run -e RULE_SERVER_ADDR -p 18087:1880 nodered_anonymizer:0.1
 
 ### streamlit(showing)
+    docker build -t streamlit_anonymizer:0.1 .
     export NODRED_ADDR=localhost:18087
     docker run -p 18502:8001 streamlit_anonymizer:0.1
 
