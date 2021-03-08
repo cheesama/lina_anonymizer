@@ -23,10 +23,13 @@ prepare below docker images
 
 - streamlit_anonymizer(build from streamlit folder)
 
-## running command
+## running command(check host ip for setting module endpoint)
 
 ### strapi(showing)
-	docker run -it -p 18501:1337 -v `pwd`/strapi_anonymizer:/srv/app strapi/strapi
+    create  strapi project from create_strapi_project.sh (manually)
+    docker build -t strapi_anonymizer:0.1 .
+    docker container create --name strapi_anonymizer_container -p 18501:1337 strapi_anonymizer:0.1
+    docker container start strapi_anonymizer_container
 
 ### rule-entity-extractor
     export META_ENDPOINT=localhost:18501/
