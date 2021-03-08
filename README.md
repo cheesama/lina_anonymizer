@@ -13,39 +13,25 @@ graph TD;
 ```
 
 ## initial setting
+prepare below docker images
 
-### strapi
-	docker run -it -p 1338:1337 -v strapi:/srv/app strapi/strapi
+strapi/strapi
+rule_entity_extractor_anonymizer(build from rule-entity-extractor folder)
+nodered_anonymizer(build from node-red folder)
+streamlit_anonymizer(build from streamlit folder)
+
+## running command
+
+### strapi(showing)
+	docker run -it -p 18501:1337 -v `pwd`/strapi_anonymizer:/srv/app strapi/strapi
 
 ### rule-entity-extractor
-    after setting META_ENDPOINT env
-
-    uvicorn inferencer:app --host=0.0.0.0 --port=8001
+    export META_ENDPOINT=localhost:18501/
+    docker run -e META_ENDPOINT -p 18086:8000 rule_entity_extractor_anonymizer:0.1 
     
 ### node-red
-    docker run -it -p 1881:1880 -v node-red:/data --name anonymizer-flow nodered/node-red
+    docker run -p 18087:1880 nodered_anonymizer:0.1
 
-### streamlit
-    streamlit run streamlit/streamlit_app.py
+### streamlit(showing)
+    docker run -p 18502:8001 streamlit_anonymizer:0.1
 
-## Architecture(As-is)
-```mermaid
-graph TD;
-    A[strapi - EC2] --> B[rule-entity-extractor - EC2];
-    B --> C[node-red - EC2];
-    D[User query] --> C;
-    C --> E[masked result];
-```
-
-## Architecture(To-be)
-```mermaid
-graph TD;
-    A[k8s] --> B[pod1]
-    A[k8s] --> C[pod2]
-    A[k8s] --> D[pod3]
-    B --> E[strapi docker]
-    C --> F[node-red docker]
-    D --> G[rule server docker]
-    E --> F
-    F --> G
-```

@@ -18,6 +18,7 @@ RUN buildDeps='gcc libc6-dev make' \
     && apt-get purge -y --auto-remove $buildDeps
 
 ENV SHELL /bin/bash
+ENV META_ENDPOINT localhost:18501/
 
 COPY inferencer.py inferencer.py 
 EXPOSE 8000
