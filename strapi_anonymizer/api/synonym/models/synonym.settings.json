@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "synonyms",
+  "info": {
+    "name": "synonym",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "entity": {
+      "model": "entity"
+    },
+    "value": {
+      "type": "text"
+    }
+  }
+}

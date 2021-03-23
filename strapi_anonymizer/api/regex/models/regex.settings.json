@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "regexes",
+  "info": {
+    "name": "regex",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "entity": {
+      "model": "entity"
+    },
+    "pattern": {
+      "type": "text"
+    }
+  }
+}

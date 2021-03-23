@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "entities",
+  "info": {
+    "name": "entity"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "entity": {
+      "type": "string"
+    },
+    "anonymization": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
