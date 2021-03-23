@@ -17,7 +17,7 @@ endpoint = os.getenv('META_ENDPOINT')
 assert endpoint is not None
 
 def request_to_server(method="get", url=None, data=None, headers=None):
-    assert method in ["get", "post", "put", "patch", "delete"]
+    assert method in ["get", "post", "put", "delete"]
 
     data = json.loads(json.dumps(data))
     
@@ -73,8 +73,8 @@ def load_rules():
     ## collect single pattern
     single_patterns = get("regexes")
     for pattern in single_patterns:
-        patterns[pattern["entity"]] = pattern["pattern"]
-        patterns_anonymization_flag[pattern['entity']] = pattern['anonymization']
+        patterns[pattern["entity"]['entity']] = pattern["pattern"]
+        patterns_anonymization_flag[pattern['entity']['entity']] = pattern['anonymization']
 
     ## collect combination pattern
     combination_patterns = get("regex-combinations")
@@ -86,8 +86,8 @@ def load_rules():
                 gen_regex.append(patterns[each_pattern].split("|"))
             gen_regex_comb += ["\\s*".join(regex) for regex in list(product(*gen_regex))]
 
-        patterns[combination["entity"]] = "|".join(gen_regex_comb)
-        patterns_anonymization_flag[combination['entity']] = combination['anonymization']
+        patterns[combination["entity"]['entity']] = "|".join(gen_regex_comb)
+        patterns_anonymization_flag[combination['entity']['entity']] = combination['anonymization']
 
     print(f"total patterns: {len(patterns)}")
     for k, v in patterns.items():
